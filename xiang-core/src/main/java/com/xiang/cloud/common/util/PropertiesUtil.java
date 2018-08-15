@@ -7,7 +7,7 @@ import java.util.Properties;
 import java.util.Set;
 
 /**
- * properties操作工具类
+ * properties操作工具类。。。
  * @author zhaijianchao
  * @date 2018/08/15
  */

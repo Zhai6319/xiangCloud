@@ -6,6 +6,10 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+/**
+ * @author zhaijianchao
+ * @date 2018/08/15
+ */
 public class PropertiesUtil {
 	
 	public static void main(String[] args) throws IOException {

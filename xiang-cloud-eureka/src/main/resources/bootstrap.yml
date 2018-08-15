@@ -1,0 +1,8 @@
+#spring:
+#  application:
+#    name: xiang-cloud-eureka
+#  cloud:
+#    config:
+#      uri: http://139.196.12.83:8563/
+#      profile: eureka
+#      label: master

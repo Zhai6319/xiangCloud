@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.cloud.sys.dao.SysMenuDao">
+    <resultMap id="SysMenuResultMap" type="com.xiang.cloud.sys.model.SysMenu">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="app_id" jdbcType="INTEGER" property="appId" />
+        <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="url" jdbcType="VARCHAR" property="url" />
+        <result column="platform" jdbcType="VARCHAR" property="platform" />
+        <result column="type" jdbcType="VARCHAR" property="type" />
+        <result column="sort" jdbcType="INTEGER" property="sort" />
+        <result column="style" jdbcType="VARCHAR" property="style" />
+        <result column="create_by_id" jdbcType="INTEGER" property="createById" />
+        <result column="modify_by_id" jdbcType="INTEGER" property="modifyById" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+        <result column="deleted" jdbcType="VARCHAR" property="deleted" />
+    </resultMap>
+    <sql id="Column_List">
+        id,
+        app_id,
+        parent_id,
+        title,
+        name,
+        url,
+        platform,
+        type,
+        sort,
+        style,
+        create_by_id,
+        modify_by_id,
+        create_time,
+        modify_time,
+      deleted
+    </sql>
+    <sql id="ALL_SQL">
+        <if test="where.id != null and where.id != '' ">
+            AND id = #{where.id,jdbcType=INTEGER}
+        </if>
+        <if test="where.appId != null and where.appId != '' ">
+            AND app_id = #{where.appId,jdbcType=INTEGER}
+        </if>
+        <if test="where.parentId != null and where.parentId != '' ">
+            AND parent_id = #{where.parentId,jdbcType=INTEGER}
+        </if>
+        <if test="where.title != null and where.title != '' ">
+            AND title = #{where.title,jdbcType=VARCHAR}
+        </if>
+        <if test="where.name != null and where.name != '' ">
+            AND name = #{where.name,jdbcType=VARCHAR}
+        </if>
+        <if test="where.url != null and where.url != '' ">
+            AND url = #{where.url,jdbcType=VARCHAR}
+        </if>
+        <if test="where.platform != null and where.platform != '' ">
+            AND platform = #{where.platform,jdbcType=VARCHAR}
+        </if>
+        <if test="where.type != null and where.type != '' ">
+            AND type = #{where.type,jdbcType=VARCHAR}
+        </if>
+        <if test="where.sort != null and where.sort != '' ">
+            AND sort = #{where.sort,jdbcType=INTEGER}
+        </if>
+        <if test="where.style != null and where.style != '' ">
+            AND style = #{where.style,jdbcType=VARCHAR}
+        </if>
+        <if test="where.createById != null and where.createById != '' ">
+            AND create_by_id = #{where.createById,jdbcType=INTEGER}
+        </if>
+        <if test="where.modifyById != null and where.modifyById != '' ">
+            AND modify_by_id = #{where.modifyById,jdbcType=INTEGER}
+        </if>
+        <if test="where.createTime != null and where.createTime != '' ">
+            AND create_time = #{where.createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="where.modifyTime != null and where.modifyTime != '' ">
+            AND modify_time = #{where.modifyTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="where.deleted != null">
+            AND deleted = #{where.deleted,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    <sql id="LIKE_SQL">
+        <if test="where.id != null and where.id != '' ">
+            AND id like CONCAT('%',#{where.id,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.appId != null and where.appId != '' ">
+            AND app_id like CONCAT('%',#{where.appId,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.parentId != null and where.parentId != '' ">
+            AND parent_id like CONCAT('%',#{where.parentId,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.title != null and where.title != '' ">
+            AND title like CONCAT('%',#{where.title,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.name != null and where.name != '' ">
+            AND name like CONCAT('%',#{where.name,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.url != null and where.url != '' ">
+            AND url like CONCAT('%',#{where.url,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.platform != null and where.platform != '' ">
+            AND platform like CONCAT('%',#{where.platform,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.type != null and where.type != '' ">
+            AND type like CONCAT('%',#{where.type,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.sort != null and where.sort != '' ">
+            AND sort like CONCAT('%',#{where.sort,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.style != null and where.style != '' ">
+            AND style like CONCAT('%',#{where.style,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.createById != null and where.createById != '' ">
+            AND create_by_id like CONCAT('%',#{where.createById,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.modifyById != null and where.modifyById != '' ">
+            AND modify_by_id like CONCAT('%',#{where.modifyById,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.createTime != null and where.createTime != '' ">
+            AND create_time like CONCAT('%',#{where.createTime,jdbcType=TIMESTAMP},'%' )
+        </if>
+        <if test="where.modifyTime != null and where.modifyTime != '' ">
+            AND modify_time like CONCAT('%',#{where.modifyTime,jdbcType=TIMESTAMP},'%' )
+        </if>
+        <if test="where.deleted != null">
+            AND deleted = #{where.deleted,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="selectByParams" parameterType="map" resultMap="SysMenuResultMap">
+        <!-- 根据条件查询信息 -->
+        select
+        <include refid="Column_List"/>
+        from sys_menu
+        <where>deleted = '0'
+            <include refid="ALL_SQL"/>
+        </where>
+    </select>
+    <select id="likeByParams" parameterType="map" resultMap="SysMenuResultMap">
+        <!-- 根据条件模糊匹配信息 -->
+        select
+        <include refid="Column_List"/>
+        from sys_menu
+        <where>deleted = '0'
+            <include refid="LIKE_SQL"/>
+        </where>
+    </select>
+    <select id="selectByPK" parameterType="java.lang.Long" resultMap="SysMenuResultMap">
+        <!-- 根据主键ID查询信息 -->
+        select
+        <include refid="Column_List"/>
+        from sys_menu
+        <where>
+            DELETED = '0' AND ID = #{pk,jdbcType=INTEGER}
+        </where>
+    </select>
+   <insert id="insert" parameterType="com.xiang.cloud.sys.model.SysMenu" useGeneratedKeys="true" keyProperty="id">
+       <!-- 添加数据 -->
+       insert into sys_menu (
+                id,
+                app_id,
+                parent_id,
+                title,
+                name,
+                url,
+                platform,
+                type,
+                sort,
+                style,
+                create_by_id,
+                modify_by_id,
+                create_time,
+                modify_time,
+              deleted
+       ) values (
+               #{id,jdbcType=INTEGER},
+               #{appId,jdbcType=INTEGER},
+               #{parentId,jdbcType=INTEGER},
+               #{title,jdbcType=VARCHAR},
+               #{name,jdbcType=VARCHAR},
+               #{url,jdbcType=VARCHAR},
+               #{platform,jdbcType=VARCHAR},
+               #{type,jdbcType=VARCHAR},
+               #{sort,jdbcType=DOUBLE},
+               #{style,jdbcType=VARCHAR},
+               #{createById,jdbcType=INTEGER},
+               #{modifyById,jdbcType=INTEGER},
+               #{createTime,jdbcType=TIMESTAMP},
+               #{modifyTime,jdbcType=TIMESTAMP},
+             #{deleted,jdbcType=VARCHAR}
+       )
+   </insert>
+    <insert id="insertSelective" parameterType="com.xiang.cloud.sys.model.SysMenu" useGeneratedKeys="true" keyProperty="id">
+        <!-- 添加数据（判断是否为空） -->
+        insert into sys_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="appId != null">
+                app_id,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="platform != null">
+                platform,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="style != null">
+                style,
+            </if>
+            <if test="createById != null">
+                create_by_id,
+            </if>
+            <if test="modifyById != null">
+                modify_by_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="appId != null">
+                #{appId,jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="platform != null">
+                #{platform,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=DOUBLE},
+            </if>
+            <if test="style != null">
+                #{style,jdbcType=VARCHAR},
+            </if>
+            <if test="createById != null">
+                #{createById,jdbcType=INTEGER},
+            </if>
+            <if test="modifyById != null">
+                #{modifyById,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleted != null">
+                #{deleted,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.List">
+        <!-- 批量添加数据 -->
+        INSERT INTO sys_menu (
+                id,
+                app_id,
+                parent_id,
+                title,
+                name,
+                url,
+                platform,
+                type,
+                sort,
+                style,
+                create_by_id,
+                modify_by_id,
+                create_time,
+                modify_time,
+              deleted
+        ) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+                    #{item.id,jdbcType=INTEGER},
+                    #{item.appId,jdbcType=INTEGER},
+                    #{item.parentId,jdbcType=INTEGER},
+                    #{item.title,jdbcType=VARCHAR},
+                    #{item.name,jdbcType=VARCHAR},
+                    #{item.url,jdbcType=VARCHAR},
+                    #{item.platform,jdbcType=VARCHAR},
+                    #{item.type,jdbcType=VARCHAR},
+                    #{item.sort,jdbcType=INTEGER},
+                    #{item.style,jdbcType=VARCHAR},
+                    #{item.createById,jdbcType=INTEGER},
+                    #{item.modifyById,jdbcType=INTEGER},
+                    #{item.createTime,jdbcType=TIMESTAMP},
+                    #{item.modifyTime,jdbcType=TIMESTAMP},
+                  #{item.deleted,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+    <update id="updateByPK" parameterType="com.xiang.cloud.sys.model.SysMenu">
+        update sys_menu set
+                app_id = #{appId,jdbcType=INTEGER},
+                parent_id = #{parentId,jdbcType=INTEGER},
+                title = #{title,jdbcType=VARCHAR},
+                name = #{name,jdbcType=VARCHAR},
+                url = #{url,jdbcType=VARCHAR},
+                platform = #{platform,jdbcType=VARCHAR},
+                type = #{type,jdbcType=VARCHAR},
+                sort = #{sort,jdbcType=INTEGER},
+                style = #{style,jdbcType=VARCHAR},
+                create_by_id = #{createById,jdbcType=INTEGER},
+                modify_by_id = #{modifyById,jdbcType=INTEGER},
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+                deleted = #{deleted,jdbcType=VARCHAR}
+                 WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPKSelective" parameterType="com.xiang.cloud.sys.model.SysMenu">
+        update sys_menu
+            <set>
+                <if test="appId != null">
+                    app_id = #{appId,jdbcType=INTEGER},
+                </if>
+                <if test="parentId != null">
+                    parent_id = #{parentId,jdbcType=INTEGER},
+                </if>
+                <if test="title != null">
+                    title = #{title,jdbcType=VARCHAR},
+                </if>
+                <if test="name != null">
+                    name = #{name,jdbcType=VARCHAR},
+                </if>
+                <if test="url != null">
+                    url = #{url,jdbcType=VARCHAR},
+                </if>
+                <if test="platform != null">
+                    platform = #{platform,jdbcType=VARCHAR},
+                </if>
+                <if test="type != null">
+                    type = #{type,jdbcType=VARCHAR},
+                </if>
+                <if test="sort != null">
+                    sort = #{sort,jdbcType=INTEGER},
+                </if>
+                <if test="style != null">
+                    style = #{style,jdbcType=VARCHAR},
+                </if>
+                <if test="createById != null">
+                    create_by_id = #{createById,jdbcType=INTEGER},
+                </if>
+                <if test="modifyById != null">
+                    modify_by_id = #{modifyById,jdbcType=INTEGER},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="modifyTime != null">
+                    modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="deleted != null">
+                    deleted = #{deleted,jdbcType=VARCHAR}
+                </if>
+            </set>
+                 where id = #{id,jdbcType=INTEGER}
+    </update>
+    <delete id="deleteByPK" parameterType="java.lang.Long">
+        delete from sys_menu where ID = #{pk,jdbcType=INTEGER}
+    </delete>
+</mapper>

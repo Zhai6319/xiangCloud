@@ -1,0 +1,22 @@
+server:
+  port: 8563
+spring:
+  application:
+    name: xiang-cloud-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/xiangsb_admin/config-server
+          #搜索路径
+          search-paths: /**
+          #默认分支
+          default-label: master
+          username: zhai_spir@sbxiang.com
+          password: zhai6319.._
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://139.196.42.160:8761/eureka/
+

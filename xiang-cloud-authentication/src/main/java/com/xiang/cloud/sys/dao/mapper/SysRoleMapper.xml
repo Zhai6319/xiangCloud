@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.cloud.sys.dao.SysRoleDao">
+    <resultMap id="SysRoleResultMap" type="com.xiang.cloud.sys.model.SysRole">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="corp_id" jdbcType="INTEGER" property="corpId" />
+        <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="create_by_id" jdbcType="INTEGER" property="createById" />
+        <result column="modify_by_id" jdbcType="INTEGER" property="modifyById" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+        <result column="deleted" jdbcType="VARCHAR" property="deleted" />
+    </resultMap>
+    <sql id="Column_List">
+        id,
+        corp_id,
+        role_name,
+        remark,
+        create_by_id,
+        modify_by_id,
+        create_time,
+        modify_time,
+      deleted
+    </sql>
+    <sql id="ALL_SQL">
+        <if test="where.id != null and where.id != '' ">
+            AND id = #{where.id,jdbcType=INTEGER}
+        </if>
+        <if test="where.corpId != null and where.corpId != '' ">
+            AND corp_id = #{where.corpId,jdbcType=INTEGER}
+        </if>
+        <if test="where.roleName != null and where.roleName != '' ">
+            AND role_name = #{where.roleName,jdbcType=VARCHAR}
+        </if>
+        <if test="where.remark != null and where.remark != '' ">
+            AND remark = #{where.remark,jdbcType=VARCHAR}
+        </if>
+        <if test="where.createById != null and where.createById != '' ">
+            AND create_by_id = #{where.createById,jdbcType=INTEGER}
+        </if>
+        <if test="where.modifyById != null and where.modifyById != '' ">
+            AND modify_by_id = #{where.modifyById,jdbcType=INTEGER}
+        </if>
+        <if test="where.createTime != null and where.createTime != '' ">
+            AND create_time = #{where.createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="where.modifyTime != null and where.modifyTime != '' ">
+            AND modify_time = #{where.modifyTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="where.deleted != null">
+            AND deleted = #{where.deleted,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    <sql id="LIKE_SQL">
+        <if test="where.id != null and where.id != '' ">
+            AND id like CONCAT('%',#{where.id,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.corpId != null and where.corpId != '' ">
+            AND corp_id like CONCAT('%',#{where.corpId,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.roleName != null and where.roleName != '' ">
+            AND role_name like CONCAT('%',#{where.roleName,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.remark != null and where.remark != '' ">
+            AND remark like CONCAT('%',#{where.remark,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.createById != null and where.createById != '' ">
+            AND create_by_id like CONCAT('%',#{where.createById,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.modifyById != null and where.modifyById != '' ">
+            AND modify_by_id like CONCAT('%',#{where.modifyById,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.createTime != null and where.createTime != '' ">
+            AND create_time like CONCAT('%',#{where.createTime,jdbcType=TIMESTAMP},'%' )
+        </if>
+        <if test="where.modifyTime != null and where.modifyTime != '' ">
+            AND modify_time like CONCAT('%',#{where.modifyTime,jdbcType=TIMESTAMP},'%' )
+        </if>
+        <if test="where.deleted != null">
+            AND deleted = #{where.deleted,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="selectByParams" parameterType="map" resultMap="SysRoleResultMap">
+        <!-- 根据条件查询信息 -->
+        select
+        <include refid="Column_List"/>
+        from sys_role
+        <where>deleted = '0'
+            <include refid="ALL_SQL"/>
+        </where>
+    </select>
+    <select id="likeByParams" parameterType="map" resultMap="SysRoleResultMap">
+        <!-- 根据条件模糊匹配信息 -->
+        select
+        <include refid="Column_List"/>
+        from sys_role
+        <where>deleted = '0'
+            <include refid="LIKE_SQL"/>
+        </where>
+    </select>
+    <select id="selectByPK" parameterType="java.lang.Long" resultMap="SysRoleResultMap">
+        <!-- 根据主键ID查询信息 -->
+        select
+        <include refid="Column_List"/>
+        from sys_role
+        <where>
+            DELETED = '0' AND ID = #{pk,jdbcType=INTEGER}
+        </where>
+    </select>
+   <insert id="insert" parameterType="com.xiang.cloud.sys.model.SysRole" useGeneratedKeys="true" keyProperty="id">
+       <!-- 添加数据 -->
+       insert into sys_role (
+                id,
+                corp_id,
+                role_name,
+                remark,
+                create_by_id,
+                modify_by_id,
+                create_time,
+                modify_time,
+              deleted
+       ) values (
+               #{id,jdbcType=INTEGER},
+               #{corpId,jdbcType=DOUBLE},
+               #{roleName,jdbcType=VARCHAR},
+               #{remark,jdbcType=VARCHAR},
+               #{createById,jdbcType=INTEGER},
+               #{modifyById,jdbcType=INTEGER},
+               #{createTime,jdbcType=TIMESTAMP},
+               #{modifyTime,jdbcType=TIMESTAMP},
+             #{deleted,jdbcType=VARCHAR}
+       )
+   </insert>
+    <insert id="insertSelective" parameterType="com.xiang.cloud.sys.model.SysRole" useGeneratedKeys="true" keyProperty="id">
+        <!-- 添加数据（判断是否为空） -->
+        insert into sys_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="corpId != null">
+                corp_id,
+            </if>
+            <if test="roleName != null">
+                role_name,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="createById != null">
+                create_by_id,
+            </if>
+            <if test="modifyById != null">
+                modify_by_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="corpId != null">
+                #{corpId,jdbcType=DOUBLE},
+            </if>
+            <if test="roleName != null">
+                #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createById != null">
+                #{createById,jdbcType=INTEGER},
+            </if>
+            <if test="modifyById != null">
+                #{modifyById,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleted != null">
+                #{deleted,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.List">
+        <!-- 批量添加数据 -->
+        INSERT INTO sys_role (
+                id,
+                corp_id,
+                role_name,
+                remark,
+                create_by_id,
+                modify_by_id,
+                create_time,
+                modify_time,
+              deleted
+        ) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+                    #{item.id,jdbcType=INTEGER},
+                    #{item.corpId,jdbcType=INTEGER},
+                    #{item.roleName,jdbcType=VARCHAR},
+                    #{item.remark,jdbcType=VARCHAR},
+                    #{item.createById,jdbcType=INTEGER},
+                    #{item.modifyById,jdbcType=INTEGER},
+                    #{item.createTime,jdbcType=TIMESTAMP},
+                    #{item.modifyTime,jdbcType=TIMESTAMP},
+                  #{item.deleted,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+    <update id="updateByPK" parameterType="com.xiang.cloud.sys.model.SysRole">
+        update sys_role set
+                corp_id = #{corpId,jdbcType=INTEGER},
+                role_name = #{roleName,jdbcType=VARCHAR},
+                remark = #{remark,jdbcType=VARCHAR},
+                create_by_id = #{createById,jdbcType=INTEGER},
+                modify_by_id = #{modifyById,jdbcType=INTEGER},
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+                deleted = #{deleted,jdbcType=VARCHAR}
+                 WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPKSelective" parameterType="com.xiang.cloud.sys.model.SysRole">
+        update sys_role
+            <set>
+                <if test="corpId != null">
+                    corp_id = #{corpId,jdbcType=INTEGER},
+                </if>
+                <if test="roleName != null">
+                    role_name = #{roleName,jdbcType=VARCHAR},
+                </if>
+                <if test="remark != null">
+                    remark = #{remark,jdbcType=VARCHAR},
+                </if>
+                <if test="createById != null">
+                    create_by_id = #{createById,jdbcType=INTEGER},
+                </if>
+                <if test="modifyById != null">
+                    modify_by_id = #{modifyById,jdbcType=INTEGER},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="modifyTime != null">
+                    modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="deleted != null">
+                    deleted = #{deleted,jdbcType=VARCHAR}
+                </if>
+            </set>
+                 where id = #{id,jdbcType=INTEGER}
+    </update>
+    <delete id="deleteByPK" parameterType="java.lang.Long">
+        delete from sys_role where ID = #{pk,jdbcType=INTEGER}
+    </delete>
+</mapper>

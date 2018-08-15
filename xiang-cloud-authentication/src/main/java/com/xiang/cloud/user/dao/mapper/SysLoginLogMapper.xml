@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.cloud.user.dao.SysLoginLogDao">
+    <resultMap id="SysLoginLogResultMap" type="com.xiang.cloud.user.model.SysLoginLog">
+        <id column="ID" jdbcType="INTEGER" property="id" />
+        <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+        <result column="LOGIN_NAME" jdbcType="VARCHAR" property="loginName" />
+        <result column="CORP_ID" jdbcType="INTEGER" property="corpId" />
+        <result column="LOGIN_TIME" jdbcType="TIMESTAMP" property="loginTime" />
+        <result column="LOGIN_IP" jdbcType="VARCHAR" property="loginIp" />
+        <result column="LOGIN_ADDRESS" jdbcType="VARCHAR" property="loginAddress" />
+        <result column="LOGIN_PLATFORM" jdbcType="VARCHAR" property="loginPlatform" />
+    </resultMap>
+    <sql id="Column_List">
+        ID,
+        USER_ID,
+        LOGIN_NAME,
+        CORP_ID,
+        LOGIN_TIME,
+        LOGIN_IP,
+      LOGIN_ADDRESS,
+      LOGIN_PLATFORM
+    </sql>
+    <sql id="ALL_SQL">
+        <if test="where.id != null and where.id != '' ">
+            AND ID = #{where.id,jdbcType=INTEGER}
+        </if>
+        <if test="where.userId != null and where.userId != '' ">
+            AND USER_ID = #{where.userId,jdbcType=INTEGER}
+        </if>
+        <if test="where.loginName != null and where.loginName != '' ">
+            AND LOGIN_NAME = #{where.loginName,jdbcType=VARCHAR}
+        </if>
+        <if test="where.corpId != null and where.corpId != '' ">
+            AND CORP_ID = #{where.corpId,jdbcType=INTEGER}
+        </if>
+        <if test="where.loginTime != null and where.loginTime != '' ">
+            AND LOGIN_TIME = #{where.loginTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="where.loginIp != null and where.loginIp != '' ">
+            AND LOGIN_IP = #{where.loginIp,jdbcType=VARCHAR}
+        </if>
+        <if test="where.loginAddress != null and where.loginAddress != '' ">
+            AND LOGIN_ADDRESS = #{where.loginAddress,jdbcType=VARCHAR}
+        </if>
+        <if test="where.loginPlatform != null and where.loginPlatform != '' ">
+            AND LOGIN_PLATFORM = #{where.loginPlatform,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    <sql id="LIKE_SQL">
+        <if test="where.id != null and where.id != '' ">
+            AND ID like CONCAT('%',#{where.id,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.userId != null and where.userId != '' ">
+            AND USER_ID like CONCAT('%',#{where.userId,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.loginName != null and where.loginName != '' ">
+            AND LOGIN_NAME like CONCAT('%',#{where.loginName,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.corpId != null and where.corpId != '' ">
+            AND CORP_ID like CONCAT('%',#{where.corpId,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.loginTime != null and where.loginTime != '' ">
+            AND LOGIN_TIME like CONCAT('%',#{where.loginTime,jdbcType=TIMESTAMP},'%' )
+        </if>
+        <if test="where.loginIp != null and where.loginIp != '' ">
+            AND LOGIN_IP like CONCAT('%',#{where.loginIp,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.loginAddress != null and where.loginAddress != '' ">
+            AND LOGIN_ADDRESS like CONCAT('%',#{where.loginAddress,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.loginPlatform != null and where.loginPlatform != '' ">
+            AND LOGIN_PLATFORM like CONCAT('%',#{where.loginPlatform,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+    <select id="selectByParams" parameterType="map" resultMap="SysLoginLogResultMap">
+        <!-- 根据条件查询信息 -->
+        select
+        <include refid="Column_List"/>
+        from sys_login_log
+        <where>deleted = '0'
+            <include refid="ALL_SQL"/>
+        </where>
+    </select>
+    <select id="likeByParams" parameterType="map" resultMap="SysLoginLogResultMap">
+        <!-- 根据条件模糊匹配信息 -->
+        select
+        <include refid="Column_List"/>
+        from sys_login_log
+        <where>deleted = '0'
+            <include refid="LIKE_SQL"/>
+        </where>
+    </select>
+    <select id="selectByPK" parameterType="java.lang.Long" resultMap="SysLoginLogResultMap">
+        <!-- 根据主键ID查询信息 -->
+        select
+        <include refid="Column_List"/>
+        from sys_login_log
+        <where>
+            DELETED = '0' AND ID = #{pk,jdbcType=INTEGER}
+        </where>
+    </select>
+   <insert id="insert" parameterType="com.xiang.cloud.user.model.SysLoginLog" useGeneratedKeys="true" keyProperty="id">
+       <!-- 添加数据 -->
+       insert into sys_login_log (
+                ID,
+                USER_ID,
+                LOGIN_NAME,
+                CORP_ID,
+                LOGIN_TIME,
+                LOGIN_IP,
+              LOGIN_ADDRESS,
+              LOGIN_PLATFORM
+       ) values (
+               #{id,jdbcType=INTEGER},
+               #{userId,jdbcType=INTEGER},
+               #{loginName,jdbcType=VARCHAR},
+               #{corpId,jdbcType=INTEGER},
+               #{loginTime,jdbcType=TIMESTAMP},
+               #{loginIp,jdbcType=VARCHAR},
+             #{loginAddress,jdbcType=VARCHAR},
+              #{loginPlatform,jdbcType=VARCHAR}
+       )
+   </insert>
+    <insert id="insertSelective" parameterType="com.xiang.cloud.user.model.SysLoginLog" useGeneratedKeys="true" keyProperty="id">
+        <!-- 添加数据（判断是否为空） -->
+        insert into sys_login_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="loginName != null">
+                LOGIN_NAME,
+            </if>
+            <if test="corpId != null">
+                CORP_ID,
+            </if>
+            <if test="loginTime != null">
+                LOGIN_TIME,
+            </if>
+            <if test="loginIp != null">
+                LOGIN_IP,
+            </if>
+            <if test="loginAddress != null">
+                LOGIN_ADDRESS,
+            </if>
+            <if test="loginPlatform != null">
+                LOGIN_PLATFORM,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="loginName != null">
+                #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="corpId != null">
+                #{corpId,jdbcType=INTEGER},
+            </if>
+            <if test="loginTime != null">
+                #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loginIp != null">
+                #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="loginAddress != null">
+                #{loginAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="loginPlatform != null">
+                #{loginPlatform,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.List">
+        <!-- 批量添加数据 -->
+        INSERT INTO sys_login_log (
+                ID,
+                USER_ID,
+                LOGIN_NAME,
+                CORP_ID,
+                LOGIN_TIME,
+                LOGIN_IP,
+              LOGIN_ADDRESS,
+              LOGIN_PLATFORM,
+        ) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+                    #{item.id,jdbcType=INTEGER},
+                    #{item.userId,jdbcType=INTEGER},
+                    #{item.loginName,jdbcType=VARCHAR},
+                    #{item.corpId,jdbcType=INTEGER},
+                    #{item.loginTime,jdbcType=TIMESTAMP},
+                    #{item.loginIp,jdbcType=VARCHAR},
+                  #{item.loginAddress,jdbcType=VARCHAR},
+                  #{item.loginPlatform,jdbcType=VARCHAR},
+            )
+        </foreach>
+    </insert>
+    <update id="updateByPK" parameterType="com.xiang.cloud.user.model.SysLoginLog">
+        update sys_login_log set
+                USER_ID = #{userId,jdbcType=INTEGER},
+                LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+                CORP_ID = #{corpId,jdbcType=INTEGER},
+                LOGIN_TIME = #{loginTime,jdbcType=TIMESTAMP},
+                LOGIN_IP = #{loginIp,jdbcType=VARCHAR},
+                LOGIN_ADDRESS = #{loginAddress,jdbcType=VARCHAR},
+                LOGIN_PLATFORM = #{loginPlatform,jdbcType=VARCHAR}
+                 WHERE ID = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPKSelective" parameterType="com.xiang.cloud.user.model.SysLoginLog">
+        update sys_login_log
+            <set>
+                <if test="userId != null">
+                    USER_ID = #{userId,jdbcType=INTEGER},
+                </if>
+                <if test="loginName != null">
+                    LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+                </if>
+                <if test="corpId != null">
+                    CORP_ID = #{corpId,jdbcType=INTEGER},
+                </if>
+                <if test="loginTime != null">
+                    LOGIN_TIME = #{loginTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="loginIp != null">
+                    LOGIN_IP = #{loginIp,jdbcType=VARCHAR},
+                </if>
+                <if test="loginAddress != null">
+                    LOGIN_ADDRESS = #{loginAddress,jdbcType=VARCHAR},
+                </if>
+                <if test="loginPlatform != null">
+                    LOGIN_PLATFORM = #{loginPlatform,jdbcType=VARCHAR}
+                </if>
+
+            </set>
+                 where ID = #{id,jdbcType=INTEGER}
+    </update>
+    <delete id="deleteByPK" parameterType="java.lang.Long">
+        delete from sys_login_log where ID = #{pk,jdbcType=INTEGER}
+    </delete>
+</mapper>

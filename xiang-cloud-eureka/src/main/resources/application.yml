@@ -1,0 +1,17 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: xiang-cloud-eurekaServer
+
+eureka:
+  instance:
+    appname: ${spring.application.name}
+    prefer-ip-address: true
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://139.196.42.160:8761/eureka/
+    register-with-eureka: false
+    fetch-registry: false

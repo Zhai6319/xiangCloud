@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.cloud.sys.dao.SysMenuDao">
+    <resultMap id="SysMenuDTOResultMap" type="com.xiang.cloud.sys.dto.SysMenuDTO">
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+    </resultMap>
+
+    <sql id="SQL_DTO">
+        <if test="where.userId != null and where.userId != ''">
+            AND su.ID = #{where.userId,jdbcType=INTEGER}
+        </if>
+        <if test="where.id != null and where.id != '' ">
+            AND sm.ID = #{where.id,jdbcType=INTEGER}
+        </if>
+        <if test="where.appId != null and where.appId != '' ">
+            AND sm.APP_ID = #{where.appId,jdbcType=INTEGER}
+        </if>
+        <if test="where.platform != null and where.platform != '' ">
+            AND sm.PLATFORM = #{where.platform,jdbcType=VARCHAR}
+        </if>
+        <if test="where.name != null and where.name != '' ">
+            AND sm.NAME = #{where.name,jdbcType=VARCHAR}
+        </if>
+        <if test="where.url != null and where.url != '' ">
+            AND sm.URL = #{where.url,jdbcType=VARCHAR}
+        </if>
+        <if test="where.type != null and where.type != '' ">
+            AND sm.TYPE = #{where.type,jdbcType=VARCHAR}
+        </if>
+        <if test="where.appId != null and where.appId != '' ">
+            AND sm.APP_ID = #{where.appId,jdbcType=VARCHAR}
+        </if>
+        <if test="where.parentId != null and where.parentId != '' ">
+            AND sm.PARENT_ID = #{where.parentId,jdbcType=INTEGER}
+        </if>
+        <if test="where.sort != null and where.sort != '' ">
+            AND sm.SORT = #{where.sort,jdbcType=INTEGER}
+        </if>
+        <if test="where.style != null and where.style != '' ">
+            AND sm.STYLE = #{where.style,jdbcType=VARCHAR}
+        </if>
+        <if test="where.createById != null and where.createById != '' ">
+            AND sm.CREATE_USER_ID = #{where.createUserId,jdbcType=INTEGER}
+        </if>
+        <if test="where.modifyById != null and where.modifyById != '' ">
+            AND sm.MODIFY_USER_ID = #{where.modifyUserId,jdbcType=INTEGER}
+        </if>
+        <if test="where.createTime != null and where.createTime != '' ">
+            AND sm.CREATE_TIME = #{where.createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="where.modifyTime != null and where.modifyTime != '' ">
+            AND sm.MODIFY_TIME = #{where.modifyTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="where.deleted != null">
+            AND sm.DELETED = #{where.deleted,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="selectDto" parameterType="map" resultMap="SysMenuDTOResultMap">
+        <!-- 根据条件查询信息 -->
+        select distinct sm.* from sys_menu sm
+        LEFT JOIN sys_role_menu srm on sm.ID = srm.MENU_ID and sm.DELETED = 0
+        LEFT JOIN sys_role sr on sr.ID = srm.ROLE_ID and sr.DELETED = 0
+        LEFT JOIN sys_user_role sur on sr.ID = sur.ROLE_ID and sr.DELETED = 0
+        LEFT JOIN sys_user su on su.ID = sur.USER_ID and su.DELETED = 0
+        <where>
+            <include refid="SQL_DTO"/>
+        </where>
+        order by sm.sort ASC
+    </select>
+
+</mapper>

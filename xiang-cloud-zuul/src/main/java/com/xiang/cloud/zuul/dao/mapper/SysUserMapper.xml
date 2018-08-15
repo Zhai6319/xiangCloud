@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.cloud.zuul.dao.SysUserDao">
+    <resultMap id="SysUserResultMap" type="com.xiang.cloud.zuul.model.SysUser">
+        <id column="ID" jdbcType="INTEGER" property="id" />
+        <result column="NAME" jdbcType="VARCHAR" property="name" />
+        <result column="SEX" jdbcType="VARCHAR" property="sex" />
+        <result column="NICK_NAME" jdbcType="VARCHAR" property="nickName" />
+        <result column="LOGIN_NAME" jdbcType="VARCHAR" property="loginName" />
+        <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+        <result column="IDCARD" jdbcType="VARCHAR" property="idcard" />
+        <result column="IDCARD_ZM_IMG" jdbcType="VARCHAR" property="idcardZmImg" />
+        <result column="IDCARD_FM_IMG" jdbcType="VARCHAR" property="idcardFmImg" />
+        <result column="USER_TYPE" jdbcType="VARCHAR" property="userType" />
+        <result column="USER_STATUS" jdbcType="VARCHAR" property="userStatus" />
+        <result column="CORP_ID" jdbcType="INTEGER" property="corpId" />
+        <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+        <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+        <result column="IP" jdbcType="VARCHAR" property="ip" />
+        <result column="LOGIN_TIME" jdbcType="TIMESTAMP" property="loginTime" />
+        <result column="LOGIN_COUNT" jdbcType="INTEGER" property="loginCount" />
+        <result column="LOGIN_ERROR_COUNT" jdbcType="INTEGER" property="loginErrorCount" />
+        <result column="USER_HEAD_PORTRAIT" jdbcType="VARCHAR" property="userHeadPortrait" />
+        <result column="CREATE_USER_ID" jdbcType="INTEGER" property="createUserId" />
+        <result column="MODIFY_USER_ID" jdbcType="INTEGER" property="modifyUserId" />
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="MODIFY_TIME" jdbcType="TIMESTAMP" property="modifyTime" />
+        <result column="DELETED" jdbcType="VARCHAR" property="deleted" />
+    </resultMap>
+    <sql id="Column_List">
+        ID,
+        NAME,
+        SEX,
+        NICK_NAME,
+        LOGIN_NAME,
+        PASSWORD,
+        IDCARD,
+        IDCARD_ZM_IMG,
+        IDCARD_FM_IMG,
+        USER_TYPE,
+        USER_STATUS,
+        CORP_ID,
+        EMAIL,
+        MOBILE,
+        IP,
+        LOGIN_TIME,
+        LOGIN_COUNT,
+        LOGIN_ERROR_COUNT,
+        USER_HEAD_PORTRAIT,
+        CREATE_USER_ID,
+        MODIFY_USER_ID,
+        CREATE_TIME,
+        MODIFY_TIME,
+      DELETED
+    </sql>
+    <sql id="ALL_SQL">
+        <if test="where.id != null and where.id != '' ">
+            AND ID = #{where.id,jdbcType=INTEGER}
+        </if>
+        <if test="where.name != null and where.name != '' ">
+            AND NAME = #{where.name,jdbcType=VARCHAR}
+        </if>
+        <if test="where.sex != null and where.sex != '' ">
+            AND SEX = #{where.sex,jdbcType=VARCHAR}
+        </if>
+        <if test="where.nickName != null and where.nickName != '' ">
+            AND NICK_NAME = #{where.nickName,jdbcType=VARCHAR}
+        </if>
+        <if test="where.loginName != null and where.loginName != '' ">
+            AND LOGIN_NAME = #{where.loginName,jdbcType=VARCHAR}
+        </if>
+        <if test="where.password != null and where.password != '' ">
+            AND PASSWORD = #{where.password,jdbcType=VARCHAR}
+        </if>
+        <if test="where.idcard != null and where.idcard != '' ">
+            AND IDCARD = #{where.idcard,jdbcType=VARCHAR}
+        </if>
+        <if test="where.idcardZmImg != null and where.idcardZmImg != '' ">
+            AND IDCARD_ZM_IMG = #{where.idcardZmImg,jdbcType=VARCHAR}
+        </if>
+        <if test="where.idcardFmImg != null and where.idcardFmImg != '' ">
+            AND IDCARD_FM_IMG = #{where.idcardFmImg,jdbcType=VARCHAR}
+        </if>
+        <if test="where.userType != null and where.userType != '' ">
+            AND USER_TYPE = #{where.userType,jdbcType=VARCHAR}
+        </if>
+        <if test="where.userStatus != null and where.userStatus != '' ">
+            AND USER_STATUS = #{where.userStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="where.corpId != null and where.corpId != '' ">
+            AND CORP_ID = #{where.corpId,jdbcType=INTEGER}
+        </if>
+        <if test="where.email != null and where.email != '' ">
+            AND EMAIL = #{where.email,jdbcType=VARCHAR}
+        </if>
+        <if test="where.mobile != null and where.mobile != '' ">
+            AND MOBILE = #{where.mobile,jdbcType=VARCHAR}
+        </if>
+        <if test="where.ip != null and where.ip != '' ">
+            AND IP = #{where.ip,jdbcType=VARCHAR}
+        </if>
+        <if test="where.loginTime != null and where.loginTime != '' ">
+            AND LOGIN_TIME = #{where.loginTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="where.loginCount != null and where.loginCount != '' ">
+            AND LOGIN_COUNT = #{where.loginCount,jdbcType=INTEGER}
+        </if>
+        <if test="where.loginErrorCount != null and where.loginErrorCount != '' ">
+            AND LOGIN_ERROR_COUNT = #{where.loginErrorCount,jdbcType=INTEGER}
+        </if>
+        <if test="where.userHeadPortrait != null and where.userHeadPortrait != '' ">
+            AND USER_HEAD_PORTRAIT = #{where.userHeadPortrait,jdbcType=VARCHAR}
+        </if>
+        <if test="where.createUserId != null and where.createUserId != '' ">
+            AND CREATE_USER_ID = #{where.createUserId,jdbcType=INTEGER}
+        </if>
+        <if test="where.modifyUserId != null and where.modifyUserId != '' ">
+            AND MODIFY_USER_ID = #{where.modifyUserId,jdbcType=INTEGER}
+        </if>
+        <if test="where.createTime != null and where.createTime != '' ">
+            AND CREATE_TIME = #{where.createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="where.modifyTime != null and where.modifyTime != '' ">
+            AND MODIFY_TIME = #{where.modifyTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="where.deleted != null">
+            AND DELETED = #{where.deleted,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    <sql id="LIKE_SQL">
+        <if test="where.id != null and where.id != '' ">
+            AND ID like CONCAT('%',#{where.id,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.name != null and where.name != '' ">
+            AND NAME like CONCAT('%',#{where.name,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.sex != null and where.sex != '' ">
+            AND SEX like CONCAT('%',#{where.sex,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.nickName != null and where.nickName != '' ">
+            AND NICK_NAME like CONCAT('%',#{where.nickName,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.loginName != null and where.loginName != '' ">
+            AND LOGIN_NAME like CONCAT('%',#{where.loginName,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.password != null and where.password != '' ">
+            AND PASSWORD like CONCAT('%',#{where.password,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.idcard != null and where.idcard != '' ">
+            AND IDCARD like CONCAT('%',#{where.idcard,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.idcardZmImg != null and where.idcardZmImg != '' ">
+            AND IDCARD_ZM_IMG like CONCAT('%',#{where.idcardZmImg,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.idcardFmImg != null and where.idcardFmImg != '' ">
+            AND IDCARD_FM_IMG like CONCAT('%',#{where.idcardFmImg,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.userType != null and where.userType != '' ">
+            AND USER_TYPE like CONCAT('%',#{where.userType,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.userStatus != null and where.userStatus != '' ">
+            AND USER_STATUS like CONCAT('%',#{where.userStatus,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.corpId != null and where.corpId != '' ">
+            AND CORP_ID like CONCAT('%',#{where.corpId,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.email != null and where.email != '' ">
+            AND EMAIL like CONCAT('%',#{where.email,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.mobile != null and where.mobile != '' ">
+            AND MOBILE like CONCAT('%',#{where.mobile,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.ip != null and where.ip != '' ">
+            AND IP like CONCAT('%',#{where.ip,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.loginTime != null and where.loginTime != '' ">
+            AND LOGIN_TIME like CONCAT('%',#{where.loginTime,jdbcType=TIMESTAMP},'%' )
+        </if>
+        <if test="where.loginCount != null and where.loginCount != '' ">
+            AND LOGIN_COUNT like CONCAT('%',#{where.loginCount,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.loginErrorCount != null and where.loginErrorCount != '' ">
+            AND LOGIN_ERROR_COUNT like CONCAT('%',#{where.loginErrorCount,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.userHeadPortrait != null and where.userHeadPortrait != '' ">
+            AND USER_HEAD_PORTRAIT like CONCAT('%',#{where.userHeadPortrait,jdbcType=VARCHAR},'%' )
+        </if>
+        <if test="where.createUserId != null and where.createUserId != '' ">
+            AND CREATE_USER_ID like CONCAT('%',#{where.createUserId,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.modifyUserId != null and where.modifyUserId != '' ">
+            AND MODIFY_USER_ID like CONCAT('%',#{where.modifyUserId,jdbcType=INTEGER},'%' )
+        </if>
+        <if test="where.createTime != null and where.createTime != '' ">
+            AND CREATE_TIME like CONCAT('%',#{where.createTime,jdbcType=TIMESTAMP},'%' )
+        </if>
+        <if test="where.modifyTime != null and where.modifyTime != '' ">
+            AND MODIFY_TIME like CONCAT('%',#{where.modifyTime,jdbcType=TIMESTAMP},'%' )
+        </if>
+        <if test="where.deleted != null">
+            AND DELETED = #{where.deleted,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="selectByParams" parameterType="map" resultMap="SysUserResultMap">
+        <!-- 根据条件查询信息 -->
+        select
+        <include refid="Column_List"/>
+        from sys_user
+        <where>deleted = '0'
+            <include refid="ALL_SQL"/>
+        </where>
+    </select>
+    <select id="likeByParams" parameterType="map" resultMap="SysUserResultMap">
+        <!-- 根据条件模糊匹配信息 -->
+        select
+        <include refid="Column_List"/>
+        from sys_user
+        <where>deleted = '0'
+            <include refid="LIKE_SQL"/>
+        </where>
+    </select>
+    <select id="selectByPK" parameterType="java.lang.Long" resultMap="SysUserResultMap">
+        <!-- 根据主键ID查询信息 -->
+        select
+        <include refid="Column_List"/>
+        from sys_user
+        <where>
+            DELETED = '0' AND ID = #{pk,jdbcType=INTEGER}
+        </where>
+    </select>
+   <insert id="insert" parameterType="com.xiang.cloud.zuul.model.SysUser" useGeneratedKeys="true" keyProperty="id">
+       <!-- 添加数据 -->
+       insert into sys_user (
+                ID,
+                NAME,
+                SEX,
+                NICK_NAME,
+                LOGIN_NAME,
+                PASSWORD,
+                IDCARD,
+                IDCARD_ZM_IMG,
+                IDCARD_FM_IMG,
+                USER_TYPE,
+                USER_STATUS,
+                CORP_ID,
+                EMAIL,
+                MOBILE,
+                IP,
+                LOGIN_TIME,
+                LOGIN_COUNT,
+                LOGIN_ERROR_COUNT,
+                USER_HEAD_PORTRAIT,
+                CREATE_USER_ID,
+                MODIFY_USER_ID,
+                CREATE_TIME,
+                MODIFY_TIME,
+              DELETED
+       ) values (
+               #{id,jdbcType=INTEGER},
+               #{name,jdbcType=VARCHAR},
+               #{sex,jdbcType=VARCHAR},
+               #{nickName,jdbcType=VARCHAR},
+               #{loginName,jdbcType=VARCHAR},
+               #{password,jdbcType=VARCHAR},
+               #{idcard,jdbcType=VARCHAR},
+               #{idcardZmImg,jdbcType=VARCHAR},
+               #{idcardFmImg,jdbcType=VARCHAR},
+               #{userType,jdbcType=VARCHAR},
+               #{userStatus,jdbcType=VARCHAR},
+               #{corpId,jdbcType=DOUBLE},
+               #{email,jdbcType=VARCHAR},
+               #{mobile,jdbcType=VARCHAR},
+               #{ip,jdbcType=VARCHAR},
+               #{loginTime,jdbcType=TIMESTAMP},
+               #{loginCount,jdbcType=DOUBLE},
+               #{loginErrorCount,jdbcType=DOUBLE},
+               #{userHeadPortrait,jdbcType=VARCHAR},
+               #{createUserId,jdbcType=INTEGER},
+               #{modifyUserId,jdbcType=INTEGER},
+               #{createTime,jdbcType=TIMESTAMP},
+               #{modifyTime,jdbcType=TIMESTAMP},
+             #{deleted,jdbcType=VARCHAR}
+       )
+   </insert>
+    <insert id="insertSelective" parameterType="com.xiang.cloud.zuul.model.SysUser" useGeneratedKeys="true" keyProperty="id">
+        <!-- 添加数据（判断是否为空） -->
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="name != null">
+                NAME,
+            </if>
+            <if test="sex != null">
+                SEX,
+            </if>
+            <if test="nickName != null">
+                NICK_NAME,
+            </if>
+            <if test="loginName != null">
+                LOGIN_NAME,
+            </if>
+            <if test="password != null">
+                PASSWORD,
+            </if>
+            <if test="idcard != null">
+                IDCARD,
+            </if>
+            <if test="idcardZmImg != null">
+                IDCARD_ZM_IMG,
+            </if>
+            <if test="idcardFmImg != null">
+                IDCARD_FM_IMG,
+            </if>
+            <if test="userType != null">
+                USER_TYPE,
+            </if>
+            <if test="userStatus != null">
+                USER_STATUS,
+            </if>
+            <if test="corpId != null">
+                CORP_ID,
+            </if>
+            <if test="email != null">
+                EMAIL,
+            </if>
+            <if test="mobile != null">
+                MOBILE,
+            </if>
+            <if test="ip != null">
+                IP,
+            </if>
+            <if test="loginTime != null">
+                LOGIN_TIME,
+            </if>
+            <if test="loginCount != null">
+                LOGIN_COUNT,
+            </if>
+            <if test="loginErrorCount != null">
+                LOGIN_ERROR_COUNT,
+            </if>
+            <if test="userHeadPortrait != null">
+                USER_HEAD_PORTRAIT,
+            </if>
+            <if test="createUserId != null">
+                CREATE_USER_ID,
+            </if>
+            <if test="modifyUserId != null">
+                MODIFY_USER_ID,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="modifyTime != null">
+                MODIFY_TIME,
+            </if>
+            <if test="deleted != null">
+                DELETED,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="loginName != null">
+                #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="idcard != null">
+                #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="idcardZmImg != null">
+                #{idcardZmImg,jdbcType=VARCHAR},
+            </if>
+            <if test="idcardFmImg != null">
+                #{idcardFmImg,jdbcType=VARCHAR},
+            </if>
+            <if test="userType != null">
+                #{userType,jdbcType=VARCHAR},
+            </if>
+            <if test="userStatus != null">
+                #{userStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="corpId != null">
+                #{corpId,jdbcType=DOUBLE},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="ip != null">
+                #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="loginTime != null">
+                #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loginCount != null">
+                #{loginCount,jdbcType=DOUBLE},
+            </if>
+            <if test="loginErrorCount != null">
+                #{loginErrorCount,jdbcType=DOUBLE},
+            </if>
+            <if test="userHeadPortrait != null">
+                #{userHeadPortrait,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=INTEGER},
+            </if>
+            <if test="modifyUserId != null">
+                #{modifyUserId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleted != null">
+                #{deleted,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.List">
+        <!-- 批量添加数据 -->
+        INSERT INTO sys_user (
+                ID,
+                NAME,
+                SEX,
+                NICK_NAME,
+                LOGIN_NAME,
+                PASSWORD,
+                IDCARD,
+                IDCARD_ZM_IMG,
+                IDCARD_FM_IMG,
+                USER_TYPE,
+                USER_STATUS,
+                CORP_ID,
+                EMAIL,
+                MOBILE,
+                IP,
+                LOGIN_TIME,
+                LOGIN_COUNT,
+                LOGIN_ERROR_COUNT,
+                USER_HEAD_PORTRAIT,
+                CREATE_USER_ID,
+                MODIFY_USER_ID,
+                CREATE_TIME,
+                MODIFY_TIME,
+              DELETED
+        ) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+                    #{item.id,jdbcType=INTEGER},
+                    #{item.name,jdbcType=VARCHAR},
+                    #{item.sex,jdbcType=VARCHAR},
+                    #{item.nickName,jdbcType=VARCHAR},
+                    #{item.loginName,jdbcType=VARCHAR},
+                    #{item.password,jdbcType=VARCHAR},
+                    #{item.idcard,jdbcType=VARCHAR},
+                    #{item.idcardZmImg,jdbcType=VARCHAR},
+                    #{item.idcardFmImg,jdbcType=VARCHAR},
+                    #{item.userType,jdbcType=VARCHAR},
+                    #{item.userStatus,jdbcType=VARCHAR},
+                    #{item.corpId,jdbcType=INTEGER},
+                    #{item.email,jdbcType=VARCHAR},
+                    #{item.mobile,jdbcType=VARCHAR},
+                    #{item.ip,jdbcType=VARCHAR},
+                    #{item.loginTime,jdbcType=TIMESTAMP},
+                    #{item.loginCount,jdbcType=INTEGER},
+                    #{item.loginErrorCount,jdbcType=INTEGER},
+                    #{item.userHeadPortrait,jdbcType=VARCHAR},
+                    #{item.createUserId,jdbcType=INTEGER},
+                    #{item.modifyUserId,jdbcType=INTEGER},
+                    #{item.createTime,jdbcType=TIMESTAMP},
+                    #{item.modifyTime,jdbcType=TIMESTAMP},
+                  #{item.deleted,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+    <update id="updateByPK" parameterType="com.xiang.cloud.zuul.model.SysUser">
+        update sys_user set
+                NAME = #{name,jdbcType=VARCHAR},
+                SEX = #{sex,jdbcType=VARCHAR},
+                NICK_NAME = #{nickName,jdbcType=VARCHAR},
+                LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+                PASSWORD = #{password,jdbcType=VARCHAR},
+                IDCARD = #{idcard,jdbcType=VARCHAR},
+                IDCARD_ZM_IMG = #{idcardZmImg,jdbcType=VARCHAR},
+                IDCARD_FM_IMG = #{idcardFmImg,jdbcType=VARCHAR},
+                USER_TYPE = #{userType,jdbcType=VARCHAR},
+                USER_STATUS = #{userStatus,jdbcType=VARCHAR},
+                CORP_ID = #{corpId,jdbcType=INTEGER},
+                EMAIL = #{email,jdbcType=VARCHAR},
+                MOBILE = #{mobile,jdbcType=VARCHAR},
+                IP = #{ip,jdbcType=VARCHAR},
+                LOGIN_TIME = #{loginTime,jdbcType=TIMESTAMP},
+                LOGIN_COUNT = #{loginCount,jdbcType=INTEGER},
+                LOGIN_ERROR_COUNT = #{loginErrorCount,jdbcType=INTEGER},
+                USER_HEAD_PORTRAIT = #{userHeadPortrait,jdbcType=VARCHAR},
+                CREATE_USER_ID = #{createUserId,jdbcType=INTEGER},
+                MODIFY_USER_ID = #{modifyUserId,jdbcType=INTEGER},
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+                MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+                DELETED = #{deleted,jdbcType=VARCHAR}
+                 WHERE ID = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPKSelective" parameterType="com.xiang.cloud.zuul.model.SysUser">
+        update sys_user
+            <set>
+                <if test="name != null">
+                    NAME = #{name,jdbcType=VARCHAR},
+                </if>
+                <if test="sex != null">
+                    SEX = #{sex,jdbcType=VARCHAR},
+                </if>
+                <if test="nickName != null">
+                    NICK_NAME = #{nickName,jdbcType=VARCHAR},
+                </if>
+                <if test="loginName != null">
+                    LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+                </if>
+                <if test="password != null">
+                    PASSWORD = #{password,jdbcType=VARCHAR},
+                </if>
+                <if test="idcard != null">
+                    IDCARD = #{idcard,jdbcType=VARCHAR},
+                </if>
+                <if test="idcardZmImg != null">
+                    IDCARD_ZM_IMG = #{idcardZmImg,jdbcType=VARCHAR},
+                </if>
+                <if test="idcardFmImg != null">
+                    IDCARD_FM_IMG = #{idcardFmImg,jdbcType=VARCHAR},
+                </if>
+                <if test="userType != null">
+                    USER_TYPE = #{userType,jdbcType=VARCHAR},
+                </if>
+                <if test="userStatus != null">
+                    USER_STATUS = #{userStatus,jdbcType=VARCHAR},
+                </if>
+                <if test="corpId != null">
+                    CORP_ID = #{corpId,jdbcType=INTEGER},
+                </if>
+                <if test="email != null">
+                    EMAIL = #{email,jdbcType=VARCHAR},
+                </if>
+                <if test="mobile != null">
+                    MOBILE = #{mobile,jdbcType=VARCHAR},
+                </if>
+                <if test="ip != null">
+                    IP = #{ip,jdbcType=VARCHAR},
+                </if>
+                <if test="loginTime != null">
+                    LOGIN_TIME = #{loginTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="loginCount != null">
+                    LOGIN_COUNT = #{loginCount,jdbcType=INTEGER},
+                </if>
+                <if test="loginErrorCount != null">
+                    LOGIN_ERROR_COUNT = #{loginErrorCount,jdbcType=INTEGER},
+                </if>
+                <if test="userHeadPortrait != null">
+                    USER_HEAD_PORTRAIT = #{userHeadPortrait,jdbcType=VARCHAR},
+                </if>
+                <if test="createUserId != null">
+                    CREATE_USER_ID = #{createUserId,jdbcType=INTEGER},
+                </if>
+                <if test="modifyUserId != null">
+                    MODIFY_USER_ID = #{modifyUserId,jdbcType=INTEGER},
+                </if>
+                <if test="createTime != null">
+                    CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="modifyTime != null">
+                    MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="deleted != null">
+                    DELETED = #{deleted,jdbcType=VARCHAR}
+                </if>
+            </set>
+                 where ID = #{id,jdbcType=INTEGER}
+    </update>
+    <delete id="deleteByPK" parameterType="java.lang.Long">
+        delete from sys_user where ID = #{pk,jdbcType=INTEGER}
+    </delete>
+</mapper>

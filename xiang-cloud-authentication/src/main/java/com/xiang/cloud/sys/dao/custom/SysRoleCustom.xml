@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.cloud.sys.dao.SysRoleDao">
+    <resultMap id="SysRoleDTOResultMap" type="com.xiang.cloud.sys.dto.SysRoleDTO" extends="SysRoleResultMap">
+
+    </resultMap>
+
+    <select id="selectByUserId" parameterType="long" resultMap="SysRoleDTOResultMap">
+        SELECT sr.* FROM sys_role sr
+        LEFT JOIN sys_user_role sur on sr.id = sur.ROLE_ID
+        WHERE sur.USER_ID = #{userId,jdbcType=INTEGER} AND sr.DELETED = 0
+    </select>
+
+</mapper>

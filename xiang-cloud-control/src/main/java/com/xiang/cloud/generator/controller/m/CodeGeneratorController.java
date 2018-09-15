@@ -1,4 +1,4 @@
-package com.xiang.cloud.zuul.controller.m;
+package com.xiang.cloud.generator.controller.m;
 
 import com.xiang.base.controller.BaseController;
 import com.xiang.base.model.Page;
@@ -6,8 +6,8 @@ import com.xiang.base.model.PagedResult;
 import com.xiang.base.model.Params;
 import com.xiang.base.response.R;
 import com.xiang.cloud.annotation.login.MLogin;
-import com.xiang.cloud.zuul.model.vo.CodeGenerator;
-import com.xiang.cloud.zuul.service.CodeGeneratorService;
+import com.xiang.cloud.generator.model.vo.CodeGenerator;
+import com.xiang.cloud.generator.service.CodeGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

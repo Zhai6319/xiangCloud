@@ -1,7 +1,7 @@
-package com.xiang.cloud.zuul.service;
+package com.xiang.cloud.generator.service;
 
 import com.xiang.base.service.BaseService;
-import com.xiang.cloud.zuul.model.vo.CodeGenerator;
+import com.xiang.cloud.generator.model.vo.CodeGenerator;
 
 /**
  * @author zhaijianchao

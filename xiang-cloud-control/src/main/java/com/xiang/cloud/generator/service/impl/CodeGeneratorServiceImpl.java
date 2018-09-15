@@ -1,12 +1,12 @@
-package com.xiang.cloud.zuul.service.impl;
+package com.xiang.cloud.generator.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.xiang.cloud.common.util.PropertiesUtil;
 import com.xiang.cloud.common.util.database.DatabaseUtil;
 import com.xiang.base.model.Params;
 import com.xiang.base.service.impl.BaseServiceImpl;
-import com.xiang.cloud.zuul.model.vo.CodeGenerator;
-import com.xiang.cloud.zuul.service.CodeGeneratorService;
+import com.xiang.cloud.generator.model.vo.CodeGenerator;
+import com.xiang.cloud.generator.service.CodeGeneratorService;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;

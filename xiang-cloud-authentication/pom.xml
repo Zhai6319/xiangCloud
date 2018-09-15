@@ -15,7 +15,7 @@
         <groupId>com.xiang.cloud</groupId>
         <artifactId>xiang-cloud</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <!-- lookup parent from repository -->
     </parent>
 
     <properties>
@@ -42,7 +42,16 @@
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
 
-
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.2.1</version>
+        </dependency>
 
     </dependencies>
 

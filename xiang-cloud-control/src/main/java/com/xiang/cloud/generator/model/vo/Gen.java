@@ -1,4 +1,4 @@
-package com.xiang.cloud.zuul.model.vo;
+package com.xiang.cloud.generator.model.vo;
 
 import com.xiang.base.model.BaseModel;
 

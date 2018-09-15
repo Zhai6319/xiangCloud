@@ -1,7 +1,7 @@
-package com.xiang.cloud.zuul.dao;
+package com.xiang.cloud.generator.dao;
 
 import com.xiang.base.dao.BaseDao;
-import com.xiang.cloud.zuul.model.vo.CodeGenerator;
+import com.xiang.cloud.generator.model.vo.CodeGenerator;
 
 /**
  * @author zhaijianchao
